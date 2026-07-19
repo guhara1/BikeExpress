@@ -3,9 +3,9 @@ import { PageHero, CtaBand } from "@/app/components/ui";
 import { regionGroups, regions } from "@/app/data/site";
 
 export const metadata = {
-  title: "전국 서비스 지역 | 전국 퀵서비스 접수 지역",
+  title: "전국 최저가 퀵서비스 접수 지역 | 17개 시·도 지역별 퀵 접수",
   description:
-    "수도권·충청·호남·영남·강원·제주까지 전국 17개 시·도 퀵서비스 접수 지역 안내. 지역별 주요 업무지구와 산업단지, 장거리 이용 정보를 확인하세요.",
+    "수도권·충청·호남·영남·강원·제주까지 전국 17개 시·도 최저가 퀵서비스 접수 지역 안내. 지역별 주요 업무지구와 산업단지, 장거리 이용 정보를 확인하고 합리적인 최저가로 접수하세요.",
 };
 
 export default function AreaIndex() {

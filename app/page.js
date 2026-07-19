@@ -10,7 +10,7 @@ import {
 } from "./data/site";
 
 export const metadata = {
-  title: `${company.name} | 전국 퀵서비스 빠른 접수 · 오토바이 퀵기사 모집`,
+  title: `${company.name} | 전국 최저가 퀵서비스 빠른 접수 · 오토바이 퀵기사 모집`,
   description:
     "전국 퀵서비스 빠른 접수. 오토바이부터 다마스·라보·1톤 화물까지 전국 배차. 서류·소형물품·기업배송·긴급배송을 출발지와 도착지에 맞춰 신속하게 접수합니다.",
 };

@@ -12,8 +12,8 @@ export function generateMetadata({ params }) {
   const r = regions[params.region];
   if (!r) return {};
   return {
-    title: `${r.name} 퀵서비스 | ${r.full} 오토바이·화물 퀵 접수`,
-    description: `${r.full} 퀵서비스 접수. ${r.districts} 지역 서류·소형물품·기업배송·긴급배송을 오토바이부터 1톤 화물까지 신속하게 배차합니다.`,
+    title: `${r.name} 퀵서비스 최저가 | ${r.full} 오토바이·화물 퀵 접수`,
+    description: `${r.full} 최저가 퀵서비스 접수. ${r.districts} 지역 서류·소형물품·기업배송·긴급배송을 오토바이부터 1톤 화물까지 합리적인 최저가로 신속하게 배차합니다.`,
   };
 }
 
@@ -27,8 +27,8 @@ export default function RegionPage({ params }) {
   return (
     <>
       <PageHero
-        title={`${r.name} 퀵서비스`}
-        desc={`${r.full}의 서류·소형물품부터 기업 화물까지, 출발지와 도착지에 맞춰 신속하게 배차합니다.`}
+        title={`${r.name} 퀵서비스 최저가`}
+        desc={`${r.full}의 서류·소형물품부터 기업 화물까지, 합리적인 최저가로 출발지와 도착지에 맞춰 신속하게 배차합니다.`}
         crumbs={[{ label: "전국 서비스 지역", href: "/area/" }, { label: `${r.name} 퀵서비스` }]}
       />
 
