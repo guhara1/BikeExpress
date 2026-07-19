@@ -12,6 +12,7 @@ const PhoneIcon = () => (
 export default function OrderForm({ compact = false }) {
   // status: "idle" | "sending" | "sent" | "error"
   const [status, setStatus] = useState("idle");
+  const [errMsg, setErrMsg] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -31,11 +32,15 @@ export default function OrderForm({ compact = false }) {
       });
       const body = await res.json().catch(() => ({}));
       if (res.ok && body.ok) {
+        setErrMsg("");
         setStatus("sent");
       } else {
+        const detail = body.detail ? ": " + body.detail : "";
+        setErrMsg(`[${res.status}] ${body.error || "unknown"}${detail}`);
         setStatus("error");
       }
-    } catch (_) {
+    } catch (err) {
+      setErrMsg("network: " + String(err && err.message ? err.message : err));
       setStatus("error");
     }
   }
@@ -73,6 +78,11 @@ export default function OrderForm({ compact = false }) {
             다시 시도
           </button>
         </div>
+        {errMsg && (
+          <p style={{ marginTop: 14, fontSize: 12, color: "var(--muted)", wordBreak: "break-all" }}>
+            진단 코드: {errMsg}
+          </p>
+        )}
       </div>
     );
   }
