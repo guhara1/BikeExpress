@@ -51,6 +51,11 @@ export default function Page() {
         <div className="container" style={{ maxWidth: 820 }}>
           <div className="section-head">
             <h2>자주 묻는 질문</h2>
+            <p>
+              지원 자격부터 근무 방식, 수입과 수수료, 가입 절차까지 예비 기사님들이 가장
+              많이 물어보시는 내용을 정리했습니다. 더 궁금한 점은 지원서에 남겨 주시면 상담
+              시 자세히 안내해 드립니다.
+            </p>
           </div>
           <Faq items={items} />
         </div>
