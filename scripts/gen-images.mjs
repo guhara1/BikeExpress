@@ -12,19 +12,19 @@ mkdirSync(OUT, { recursive: true });
 
 // ---- 팔레트 ----
 const C = {
-  blue: "#1f5fd6",
-  blueD: "#143f93",
-  blueDD: "#10306f",
-  blueL: "#4f86e8",
-  sky1: "#2b73ef",
-  sky2: "#10306f",
-  orange: "#ff7a1a",
-  orangeD: "#e5670c",
-  orangeDD: "#7a3b00",
-  ink: "#16202e",
-  cream: "#fef6ee",
+  blue: "#2456d9",
+  blueD: "#1a3fa6",
+  blueDD: "#12295f",
+  blueL: "#4f83ea",
+  sky1: "#2a63ee",
+  sky2: "#12295f",
+  orange: "#f97316",
+  orangeD: "#e05f08",
+  orangeDD: "#6e3400",
+  ink: "#0f1b2e",
+  cream: "#fff4e8",
   white: "#ffffff",
-  box: "#f4b26a",
+  box: "#f6b465",
   boxD: "#e08b3c",
 };
 
