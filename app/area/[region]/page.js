@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PageHero, CtaBand } from "@/app/components/ui";
+import { PageHero, CtaBand, Faq } from "@/app/components/ui";
 import OrderForm from "@/app/components/OrderForm";
 import { regions, regionSlugs, regionGroups } from "@/app/data/site";
+import { regionContent } from "@/app/data/regionContent";
 
 export function generateStaticParams() {
   return regionSlugs.map((region) => ({ region }));
@@ -21,6 +22,7 @@ export default function RegionPage({ params }) {
   const r = regions[params.region];
   if (!r) notFound();
 
+  const c = (regionContent[r.slug] && regionContent[r.slug].customer) || {};
   const group = regionGroups.find((g) => g.regions.includes(r.slug));
   const siblings = group ? group.regions.filter((s) => s !== r.slug) : [];
 
@@ -36,8 +38,15 @@ export default function RegionPage({ params }) {
         <div className="container">
           <div className="split">
             <div className="prose">
-              <h2>{r.full} 퀵서비스 안내</h2>
-              <p className="lead-text">{r.industry}</p>
+              <h2>{r.full} 최저가 퀵서비스 안내</h2>
+              <p className="lead-text">{c.intro || r.industry}</p>
+
+              {c.logistics && (
+                <>
+                  <h3>{r.name} 지역 물류 환경</h3>
+                  <p>{c.logistics}</p>
+                </>
+              )}
 
               <h3>주요 업무지구·산업단지</h3>
               <div className="pill-list">
@@ -46,13 +55,41 @@ export default function RegionPage({ params }) {
                 ))}
               </div>
 
-              <h3>자주 이용되는 배송</h3>
-              <ul>
-                <li>서류·계약서·도장 등 긴급 문서 배송 (오토바이 퀵)</li>
-                <li>부품·샘플·소형 박스의 당일 배송</li>
-                <li>매장·거래처 물품의 다마스·라보 배송</li>
-                <li>기업 화물·대량 물품의 1톤 이상 화물 배송</li>
-              </ul>
+              <h3>{r.name}에서 자주 이용되는 배송</h3>
+              {c.deliveryTypes ? (
+                <ul>
+                  {c.deliveryTypes.map((d, i) => (
+                    <li key={i}>
+                      <b>{d.title}</b> — {d.desc}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <ul>
+                  <li>서류·계약서·도장 등 긴급 문서 배송 (오토바이 퀵)</li>
+                  <li>부품·샘플·소형 박스의 당일 배송</li>
+                  <li>매장·거래처 물품의 다마스·라보 배송</li>
+                  <li>기업 화물·대량 물품의 1톤 이상 화물 배송</li>
+                </ul>
+              )}
+
+              {c.routes && (
+                <>
+                  <h3>대표 배송 경로</h3>
+                  <ul>
+                    {c.routes.map((rt, i) => (
+                      <li key={i}>{rt}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
+
+              {c.coverage && (
+                <>
+                  <h3>{r.name} 서비스 커버리지</h3>
+                  <p>{c.coverage}</p>
+                </>
+              )}
 
               <h3>인접 도시 이동 · 장거리 이용</h3>
               <p>
@@ -70,9 +107,7 @@ export default function RegionPage({ params }) {
 
               <div className="callout">
                 <p>
-                  <b>지역별 배차 참고사항</b> — {r.districts} 전역에서 접수 가능하며,
-                  도서·산간 및 원거리 구간은 배차 가능 여부와 요금을 접수 전 상담을 통해
-                  안내합니다.
+                  <b>지역별 배차 참고사항</b> — {c.notes || `${r.districts} 전역에서 접수 가능하며, 도서·산간 및 원거리 구간은 배차 가능 여부와 요금을 접수 전 상담을 통해 안내합니다.`}
                 </p>
               </div>
             </div>
@@ -81,7 +116,7 @@ export default function RegionPage({ params }) {
               <div className="form-card" style={{ position: "sticky", top: 88 }}>
                 <h3 style={{ marginBottom: 4 }}>{r.name} 지역 빠른 접수</h3>
                 <p style={{ fontSize: 14, marginBottom: 16 }}>
-                  아래 정보를 남기시면 예상요금과 배차 가능 여부를 안내합니다.
+                  아래 정보를 남기시면 예상요금과 배차 가능 여부를 최저가로 안내합니다.
                 </p>
                 <OrderForm compact />
               </div>
@@ -90,8 +125,19 @@ export default function RegionPage({ params }) {
         </div>
       </section>
 
-      {siblings.length > 0 && (
+      {c.faq && c.faq.length > 0 && (
         <section className="section soft">
+          <div className="container" style={{ maxWidth: 820 }}>
+            <div className="section-head">
+              <h2>{r.name} 퀵서비스 자주 묻는 질문</h2>
+            </div>
+            <Faq items={c.faq} />
+          </div>
+        </section>
+      )}
+
+      {siblings.length > 0 && (
+        <section className="section">
           <div className="container">
             <div className="section-head">
               <h2>{group.name} 다른 지역</h2>
@@ -109,8 +155,8 @@ export default function RegionPage({ params }) {
       )}
 
       <CtaBand
-        title={`${r.name}에서 퀵서비스가 필요하세요?`}
-        desc="지금 접수하시면 가까운 기사에게 신속하게 배차합니다."
+        title={`${r.name}에서 최저가 퀵서비스가 필요하세요?`}
+        desc="지금 접수하시면 가까운 기사에게 합리적인 최저가로 신속하게 배차합니다."
       />
     </>
   );

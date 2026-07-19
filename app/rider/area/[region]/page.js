@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PageHero, CtaBand } from "@/app/components/ui";
+import { PageHero, CtaBand, Faq } from "@/app/components/ui";
 import RiderForm from "@/app/components/RiderForm";
 import { regions, regionSlugs } from "@/app/data/site";
+import { regionContent } from "@/app/data/regionContent";
 
 export function generateStaticParams() {
   return regionSlugs.map((region) => ({ region }));
@@ -13,13 +14,15 @@ export function generateMetadata({ params }) {
   if (!r) return {};
   return {
     title: `${r.name} 퀵서비스 기사 모집 | ${r.full} 오토바이·화물 기사`,
-    description: `${r.full} 퀵서비스 기사를 모집합니다. 초보·투잡·경력 무관, ${r.name} 지역에서 원하는 시간에 활동하세요. 비대면 가입 가능.`,
+    description: `${r.full} 퀵서비스 기사를 모집합니다. 초보·투잡·경력 무관, ${r.name} 지역에서 원하는 시간에 활동하세요. 물량 특성과 활동 여건, 비대면 가입까지 안내합니다.`,
   };
 }
 
 export default function RiderRegionPage({ params }) {
   const r = regions[params.region];
   if (!r) notFound();
+
+  const rd = (regionContent[r.slug] && regionContent[r.slug].rider) || {};
 
   return (
     <>
@@ -36,10 +39,16 @@ export default function RiderRegionPage({ params }) {
             <div className="prose">
               <h2>{r.name} 지역 기사 모집 안내</h2>
               <p className="lead-text">
-                {r.name}은 {r.industry.replace(/입니다\.?$/, "")} 지역으로, 서류·소형물품부터
-                기업 화물까지 다양한 배송 물량이 발생합니다. 활동 지역을 중심으로 꾸준히
-                일하실 수 있습니다.
+                {rd.intro ||
+                  `${r.name}은 ${r.industry.replace(/입니다\.?$/, "")} 지역으로, 서류·소형물품부터 기업 화물까지 다양한 배송 물량이 발생합니다.`}
               </p>
+
+              {rd.demand && (
+                <>
+                  <h3>{r.name} 지역 배송 물량·수요 특성</h3>
+                  <p>{rd.demand}</p>
+                </>
+              )}
 
               <h3>{r.name}에서 이런 분을 찾습니다</h3>
               <ul className="checklist">
@@ -49,11 +58,52 @@ export default function RiderRegionPage({ params }) {
                 <li>초보라도 성실하게 배우려는 분</li>
               </ul>
 
+              {rd.areas && (
+                <>
+                  <h3>{r.name} 주요 활동 권역·동선</h3>
+                  <p>{rd.areas}</p>
+                </>
+              )}
+
+              {rd.tips && rd.tips.length > 0 && (
+                <>
+                  <h3>{r.name}에서 효율적으로 활동하는 팁</h3>
+                  <ul className="checklist">
+                    {rd.tips.map((t, i) => (
+                      <li key={i}>{t}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
+
               <h3>{r.name} 지역 활동의 특징</h3>
               <ul>
                 <li>주요 배송 거점: {r.hubs.join(", ")}</li>
                 <li>인근 지역({r.nearby.join(", ")}) 연계 배송 기회</li>
                 <li>{r.longDistance}</li>
+              </ul>
+
+              <h3>{r.name}에서 꾸준히 일할 수 있는 이유</h3>
+              <p>
+                {r.name}은 {r.hubs[0]}을(를) 비롯한 주요 거점에서 배송 수요가 꾸준히
+                이어지고, {r.nearby.slice(0, 2).join("·")} 등 인접 지역과 연계된 배송도 많아
+                활동 반경을 넓히면 물량 확보가 한결 수월합니다. 자신의 생활권과 활동
+                시간대에 맞춰 배송량을 조절하면, 무리하지 않으면서도 안정적으로 배송 일을
+                이어 가실 수 있습니다.
+              </p>
+
+              <h3>{r.name} 기사 지원부터 첫 배송까지</h3>
+              <p>
+                {r.name} 지역 활동은 아래 절차로 간단하게 시작할 수 있습니다. 지원과 서류
+                확인이 비대면으로 가능해, 준비물만 갖춰져 있으면 빠르게 배송을 시작하실 수
+                있습니다.
+              </p>
+              <ul className="checklist">
+                <li>온라인 지원서 작성 후 담당자 상담 진행</li>
+                <li>차량·면허·서류 확인 및 {r.name} 활동 지역 설정</li>
+                <li>배차 앱 설치와 기본 사용법·안전 수칙 안내</li>
+                <li>가까운 지역 단거리 배송부터 시작해 동선 적응</li>
+                <li>활동량에 따라 정산하며 점차 활동 반경 확대</li>
               </ul>
 
               <div className="callout">
@@ -79,6 +129,17 @@ export default function RiderRegionPage({ params }) {
           </div>
         </div>
       </section>
+
+      {rd.faq && rd.faq.length > 0 && (
+        <section className="section soft">
+          <div className="container" style={{ maxWidth: 820 }}>
+            <div className="section-head">
+              <h2>{r.name} 기사 모집 자주 묻는 질문</h2>
+            </div>
+            <Faq items={rd.faq} />
+          </div>
+        </section>
+      )}
 
       <CtaBand
         title={`${r.name}에서 퀵기사로 시작하세요`}
