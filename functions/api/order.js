@@ -59,7 +59,16 @@ export async function onRequestPost(context) {
   const chatId = env.TELEGRAM_CHAT_ID;
 
   if (!token || !chatId) {
-    return json({ ok: false, error: "not_configured" }, 503);
+    // 비밀값은 노출하지 않고, 인식 여부와 개수만 진단용으로 전달
+    const keys = Object.keys(env || {});
+    return json(
+      {
+        ok: false,
+        error: "not_configured",
+        detail: `TOKEN=${token ? "O" : "X"} CHAT_ID=${chatId ? "O" : "X"} envCount=${keys.length}`,
+      },
+      503
+    );
   }
 
   let data = {};
