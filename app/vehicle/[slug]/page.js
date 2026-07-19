@@ -61,6 +61,9 @@ export default function VehiclePage({ params }) {
             </div>
 
             <div>
+              <div className="feature-figure" style={{ marginBottom: 18 }}>
+                <img src={`/images/vehicle-${v.slug}.webp`} width="900" height="640" loading="lazy" alt={`${v.name} 일러스트`} />
+              </div>
               <div className="card" style={{ background: "var(--bg-soft)" }}>
                 <h3>{v.name} 바로 접수</h3>
                 <p>출발지·도착지와 물품만 알려주시면 신속하게 배차합니다.</p>

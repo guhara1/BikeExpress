@@ -22,7 +22,9 @@ export default function VehicleIndex() {
           <div className="grid grid-3">
             {vehicles.map((v) => (
               <Link href={`/vehicle/${v.slug}/`} key={v.slug} className="card link">
-                <div className="card-icon">{v.slug === "motorcycle" ? "🛵" : "🚚"}</div>
+                <div className="card-media">
+                  <img src={`/images/vehicle-${v.slug}.webp`} width="900" height="600" loading="lazy" alt={`${v.name} 차량`} />
+                </div>
                 <h3>{v.name}</h3>
                 <p>{v.summary}</p>
                 <div className="pill-list" style={{ marginTop: 12 }}>

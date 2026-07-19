@@ -392,6 +392,58 @@ p {
   gap: 12px;
   flex-wrap: wrap;
 }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 40px;
+  align-items: center;
+}
+.hero-figure {
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(6, 20, 48, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  line-height: 0;
+}
+.hero-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 카드 상단 썸네일 이미지 */
+.card-media {
+  margin: -24px -24px 16px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  overflow: hidden;
+  line-height: 0;
+  aspect-ratio: 3 / 2;
+  background: var(--brand-light);
+}
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+.card.link:hover .card-media img {
+  transform: scale(1.04);
+}
+
+/* 섹션 피처 이미지 */
+.feature-figure {
+  border-radius: 16px;
+  overflow: hidden;
+  line-height: 0;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--line);
+}
+.feature-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
 /* ---------- Sections ---------- */
 .section {
@@ -621,12 +673,18 @@ tr:last-child td {
 
 /* ---------- Page hero (interior) ---------- */
 .page-hero {
-  background: linear-gradient(135deg, var(--brand-dark), var(--brand));
+  background:
+    linear-gradient(90deg, rgba(16, 48, 111, 0.96) 0%, rgba(20, 63, 147, 0.82) 46%, rgba(31, 95, 214, 0.34) 100%),
+    url(/images/hero-tex.webp) center right / cover no-repeat,
+    var(--brand);
   color: #fff;
   padding: 48px 0 52px;
 }
 .page-hero.rider {
-  background: linear-gradient(135deg, #7a3b00, var(--accent));
+  background:
+    linear-gradient(90deg, rgba(122, 59, 0, 0.96) 0%, rgba(180, 84, 8, 0.8) 46%, rgba(255, 122, 26, 0.34) 100%),
+    url(/images/hero-tex-rider.webp) center right / cover no-repeat,
+    var(--accent);
 }
 .page-hero h1 {
   color: #fff;
@@ -794,7 +852,10 @@ tr:last-child td {
 
 /* ---------- CTA band ---------- */
 .cta-band {
-  background: linear-gradient(135deg, var(--ink), #1b3358);
+  background:
+    linear-gradient(135deg, rgba(22, 32, 46, 0.92), rgba(27, 51, 88, 0.86)),
+    url(/images/cta-tex.webp) center / cover no-repeat,
+    var(--ink);
   color: #fff;
   border-radius: 18px;
   padding: 44px;
@@ -906,6 +967,11 @@ tr:last-child td {
   .header-cta { gap: 6px; }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .steps { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+  .hero-figure { max-width: 520px; }
 }
 
 @media (max-width: 720px) {

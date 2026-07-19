@@ -30,6 +30,24 @@ export default function BusinessIndex() {
 
       <section className="section">
         <div className="container">
+          <div className="split" style={{ marginBottom: 44 }}>
+            <div className="prose">
+              <h2>기업 물류를 더 효율적으로</h2>
+              <p className="lead-text">
+                반복되는 배송은 정기배송과 월 정산으로, 여러 지점은 다지점 배송으로.
+                업종 특성에 맞춘 기업 물류를 전담 상담으로 지원합니다.
+              </p>
+              <ul className="checklist">
+                <li>세금계산서 발행 · 월 단위 정산</li>
+                <li>정기·다지점·대량 배송 통합 관리</li>
+                <li>업종별 맞춤 배송(병원·법무·부품 등)</li>
+              </ul>
+            </div>
+            <div className="feature-figure">
+              <img src="/images/business.webp" width="1000" height="800" loading="lazy" alt="기업 배송과 정기배송·월 정산을 나타내는 일러스트" />
+            </div>
+          </div>
+
           <div className="grid grid-3" style={{ marginBottom: 40 }}>
             <div className="card"><h3>세금계산서 발행</h3><p>월 단위 세금계산서 발행으로 회계 처리가 간편합니다.</p></div>
             <div className="card"><h3>월 단위 정산</h3><p>건별 결제 없이 한 달 이용분을 한 번에 정산합니다.</p></div>

@@ -19,6 +19,24 @@ export default function AreaIndex() {
 
       <section className="section">
         <div className="container">
+          <div className="split" style={{ marginBottom: 44 }}>
+            <div className="prose">
+              <h2>전국 어디서든 배차합니다</h2>
+              <p className="lead-text">
+                수도권·충청·호남·영남·강원·제주까지 전국 배차 네트워크로 연결합니다.
+                권역별로 주요 도시를 선택해 지역 안내와 빠른 접수를 확인하세요.
+              </p>
+              <ul className="checklist">
+                <li>전국 17개 시·도 서비스</li>
+                <li>지역 내 단거리부터 수도권↔지방 장거리까지</li>
+                <li>산업단지·업무지구 중심의 물류 대응</li>
+              </ul>
+            </div>
+            <div className="feature-figure">
+              <img src="/images/map-nationwide.webp" width="1000" height="900" loading="lazy" alt="전국 서비스 지역을 나타내는 대한민국 배차 네트워크 지도" />
+            </div>
+          </div>
+
           <div className="grid grid-2">
             {regionGroups.map((g) => (
               <div className="card" key={g.key}>

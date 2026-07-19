@@ -29,6 +29,9 @@ export default function GuideIndex() {
 
       <section className="section">
         <div className="container" style={{ maxWidth: 860 }}>
+          <div className="feature-figure" style={{ marginBottom: 32 }}>
+            <img src="/images/guide.webp" width="1000" height="800" loading="lazy" alt="퀵서비스 요금표와 요금 문의를 나타내는 일러스트" />
+          </div>
           <Blocks
             items={[
               { h2: "퀵서비스 요금 안내" },

@@ -31,10 +31,23 @@ export default function SupportIndex() {
 
       <section className="section">
         <div className="container">
-          <div className="callout" style={{ marginBottom: 32, textAlign: "center" }}>
-            <p>
-              빠른 상담은 고객센터 <b>{company.phone}</b> ({company.hours})로 연락 주세요.
-            </p>
+          <div className="split" style={{ marginBottom: 40 }}>
+            <div className="prose">
+              <h2>무엇을 도와드릴까요?</h2>
+              <p className="lead-text">
+                궁금한 점이나 불편한 점을 편하게 문의하세요. 문의 유형을 선택하면 담당자가
+                더 빠르게 안내해 드립니다.
+              </p>
+              <div className="callout">
+                <p>
+                  빠른 상담은 고객센터 <b>{company.phone}</b> ({company.hours})로 연락
+                  주세요.
+                </p>
+              </div>
+            </div>
+            <div className="feature-figure">
+              <img src="/images/support.webp" width="1000" height="800" loading="lazy" alt="고객지원 상담을 나타내는 헤드셋과 말풍선 일러스트" />
+            </div>
           </div>
           <CardGrid items={items} cols={4} />
         </div>

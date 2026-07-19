@@ -28,14 +28,19 @@ export default function CompanyIndex() {
 
       <section className="section">
         <div className="container" style={{ maxWidth: 860 }}>
-          <div className="prose">
-            <h2>전국을 잇는 퀵서비스</h2>
-            <p className="lead-text">
-              {company.name}({company.nameEn})는 서류 한 장부터 파렛트 화물까지, 출발지와
-              도착지에 맞춰 가장 적합한 차량과 기사를 신속하게 배차합니다. 고객에게는
-              빠르고 안전한 배송을, 기사에게는 꾸준하고 자유로운 일자리를 제공하는 것을
-              목표로 합니다.
-            </p>
+          <div className="split" style={{ marginBottom: 8 }}>
+            <div className="prose">
+              <h2>전국을 잇는 퀵서비스</h2>
+              <p className="lead-text">
+                {company.name}({company.nameEn})는 서류 한 장부터 파렛트 화물까지,
+                출발지와 도착지에 맞춰 가장 적합한 차량과 기사를 신속하게 배차합니다.
+                고객에게는 빠르고 안전한 배송을, 기사에게는 꾸준하고 자유로운 일자리를
+                제공하는 것을 목표로 합니다.
+              </p>
+            </div>
+            <div className="feature-figure">
+              <img src="/images/company.webp" width="1000" height="800" loading="lazy" alt="전국 배차 네트워크를 나타내는 지도와 연결 노드 일러스트" />
+            </div>
           </div>
 
           <div className="stat-row" style={{ margin: "32px 0" }}>

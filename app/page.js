@@ -16,12 +16,12 @@ export const metadata = {
 };
 
 const services = [
-  { slug: "motorcycle", name: "오토바이 퀵", desc: "서류·소형물품 긴급 배송", href: "/quick-service/motorcycle/" },
-  { slug: "damas", name: "다마스 퀵", desc: "중형 박스·다량 소화물", href: "/vehicle/damas/" },
-  { slug: "labo", name: "라보 퀵", desc: "부피 있는 화물·자재", href: "/vehicle/labo/" },
-  { slug: "1ton", name: "1톤 화물", desc: "대량·중량 화물 운송", href: "/vehicle/1ton/" },
-  { slug: "long", name: "지방 장거리", desc: "수도권↔지방 장거리 배차", href: "/quick-service/long-distance/" },
-  { slug: "biz", name: "기업 정기배송", desc: "월 정산·다지점 배송", href: "/business/" },
+  { slug: "motorcycle", name: "오토바이 퀵", desc: "서류·소형물품 긴급 배송", href: "/quick-service/motorcycle/", img: "/images/vehicle-motorcycle.webp" },
+  { slug: "damas", name: "다마스 퀵", desc: "중형 박스·다량 소화물", href: "/vehicle/damas/", img: "/images/vehicle-damas.webp" },
+  { slug: "labo", name: "라보 퀵", desc: "부피 있는 화물·자재", href: "/vehicle/labo/", img: "/images/vehicle-labo.webp" },
+  { slug: "1ton", name: "1톤 화물", desc: "대량·중량 화물 운송", href: "/vehicle/1ton/", img: "/images/vehicle-1ton.webp" },
+  { slug: "long", name: "지방 장거리", desc: "수도권↔지방 장거리 배차", href: "/quick-service/long-distance/", img: "/images/map-nationwide.webp" },
+  { slug: "biz", name: "기업 정기배송", desc: "월 정산·다지점 배송", href: "/business/", img: "/images/business.webp" },
 ];
 
 export default function Home() {
@@ -30,26 +30,39 @@ export default function Home() {
       {/* Hero */}
       <section className="hero">
         <div className="container hero-inner">
-          <span className="hero-badge">🛵 전국 배차 · 당일·긴급 접수 가능</span>
-          <h1>
-            전국 퀵서비스 빠른 접수
-            <br />
-            오토바이부터 1톤 화물까지 전국 배차
-          </h1>
-          <p className="lead">
-            서류, 소형물품, 기업배송, 긴급배송을 출발지와 도착지에 맞춰 신속하게
-            접수합니다. 전국 어디서든 가까운 기사에게 바로 배차합니다.
-          </p>
-          <div className="hero-actions">
-            <Link href="/order/" className="btn btn-accent btn-lg">
-              퀵서비스 접수하기
-            </Link>
-            <Link href="/guide/" className="btn btn-ghost btn-lg">
-              예상요금 문의
-            </Link>
-            <a href={`tel:${company.phoneRaw}`} className="btn btn-ghost btn-lg">
-              전화로 접수 {company.phone}
-            </a>
+          <div className="hero-grid">
+            <div>
+              <span className="hero-badge">🛵 전국 배차 · 당일·긴급 접수 가능</span>
+              <h1>
+                전국 퀵서비스 빠른 접수
+                <br />
+                오토바이부터 1톤 화물까지 전국 배차
+              </h1>
+              <p className="lead">
+                서류, 소형물품, 기업배송, 긴급배송을 출발지와 도착지에 맞춰 신속하게
+                접수합니다. 전국 어디서든 가까운 기사에게 바로 배차합니다.
+              </p>
+              <div className="hero-actions">
+                <Link href="/order/" className="btn btn-accent btn-lg">
+                  퀵서비스 접수하기
+                </Link>
+                <Link href="/guide/" className="btn btn-ghost btn-lg">
+                  예상요금 문의
+                </Link>
+                <a href={`tel:${company.phoneRaw}`} className="btn btn-ghost btn-lg">
+                  전화로 접수 {company.phone}
+                </a>
+              </div>
+            </div>
+            <div className="hero-figure">
+              <img
+                src="/images/hero-home.webp"
+                width="1600"
+                height="900"
+                alt="도심을 달리는 전국 퀵서비스 배송 오토바이 일러스트"
+                fetchPriority="high"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -65,8 +78,8 @@ export default function Home() {
           <div className="grid grid-3">
             {services.map((s) => (
               <Link href={s.href} key={s.slug} className="card link">
-                <div className="card-icon">
-                  {s.slug === "motorcycle" ? "🛵" : s.slug === "long" ? "🗺️" : s.slug === "biz" ? "🏢" : "🚚"}
+                <div className="card-media">
+                  <img src={s.img} width="900" height="600" loading="lazy" alt={`${s.name} 서비스`} />
                 </div>
                 <h3>{s.name}</h3>
                 <p>{s.desc}</p>
@@ -173,15 +186,8 @@ export default function Home() {
                 <Link href="/business/" className="btn btn-primary">기업배송 자세히 보기</Link>
               </div>
             </div>
-            <div className="card" style={{ background: "var(--bg-soft)" }}>
-              <h3>기업 상담 신청</h3>
-              <p>월 예상 이용 건수와 주요 배송 구간을 알려주시면 맞춤 견적을 안내합니다.</p>
-              <ul className="checklist" style={{ margin: "16px 0" }}>
-                <li>업종별 배송 (병원·약국, 법무·세무, 인쇄·샘플, 부품·자재)</li>
-                <li>쇼핑몰·이커머스 출고 배송</li>
-                <li>대량·다지점 정기 배송</li>
-              </ul>
-              <Link href="/business/contact/" className="btn btn-outline">기업 상담 신청하기</Link>
+            <div className="feature-figure">
+              <img src="/images/business.webp" width="1000" height="800" loading="lazy" alt="기업 배송, 정기배송과 월 정산을 나타내는 일러스트" />
             </div>
           </div>
         </div>

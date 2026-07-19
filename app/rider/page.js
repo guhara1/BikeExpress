@@ -32,6 +32,24 @@ export default function RiderIndex() {
 
       <section className="section">
         <div className="container">
+          <div className="split" style={{ marginBottom: 44 }}>
+            <div className="prose">
+              <h2>오토바이 한 대로 시작하세요</h2>
+              <p className="lead-text">
+                전국 배차 네트워크에서 원하는 지역, 원하는 시간에 일할 수 있습니다.
+                초보·투잡·경력 기사 모두 환영하며, 비대면으로 간편하게 시작합니다.
+              </p>
+              <ul className="checklist">
+                <li>원하는 지역·시간 중심의 자유로운 근무</li>
+                <li>전국 단위 배차로 꾸준한 배송 물량</li>
+                <li>투명한 수수료·정산 구조</li>
+              </ul>
+            </div>
+            <div className="feature-figure">
+              <img src="/images/hero-rider.webp" width="1600" height="900" loading="lazy" alt="전국 퀵기사 모집을 나타내는 배송 오토바이 라이더 일러스트" />
+            </div>
+          </div>
+
           <div className="stat-row">
             <div className="stat">
               <b>전국</b>

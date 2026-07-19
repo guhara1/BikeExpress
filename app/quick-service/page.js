@@ -28,6 +28,23 @@ export default function QuickServiceIndex() {
       />
       <section className="section">
         <div className="container">
+          <div className="split" style={{ marginBottom: 44 }}>
+            <div className="prose">
+              <h2>필요한 배송, 정확하게 접수</h2>
+              <p className="lead-text">
+                당일·긴급·예약부터 장거리·왕복·경유 배송까지, 상황에 맞는 서비스를
+                선택하면 배차가 더 빠르고 정확합니다.
+              </p>
+              <ul className="checklist">
+                <li>전국 어디서나 접수 가능</li>
+                <li>가까운 기사에게 우선 배차</li>
+                <li>전화·카카오톡·온라인 접수 선택</li>
+              </ul>
+            </div>
+            <div className="feature-figure">
+              <img src="/images/service-quick.webp" width="1000" height="800" loading="lazy" alt="휴대폰으로 퀵서비스를 접수하는 모습 일러스트" />
+            </div>
+          </div>
           <LinkList items={items} cols={3} />
         </div>
       </section>
