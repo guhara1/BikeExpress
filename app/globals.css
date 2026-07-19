@@ -826,6 +826,44 @@ tbody tr:hover {
   margin: 14px 0 0;
   line-height: 1.6;
 }
+.form-note b {
+  color: var(--accent-dark);
+}
+
+/* 접수 버튼 + 전화 즉시 예약 버튼 */
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+.form-actions > button[type="submit"] {
+  flex: 1 1 190px;
+}
+.btn-call {
+  flex: 1 1 190px;
+  gap: 10px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+.btn-call span {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.12;
+}
+.btn-call b {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+}
+.btn-call em {
+  font-style: normal;
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0.95;
+  letter-spacing: 0.01em;
+}
 
 /* ============================================================
    Interior page hero

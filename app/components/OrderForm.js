@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { vehicles } from "@/app/data/site";
+import { vehicles, company } from "@/app/data/site";
+
+const PhoneIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+  </svg>
+);
 
 export default function OrderForm({ compact = false }) {
   const [sent, setSent] = useState(false);
@@ -111,12 +117,26 @@ export default function OrderForm({ compact = false }) {
         )}
       </div>
 
-      <button type="submit" className="btn btn-primary btn-lg" style={{ width: "100%", marginTop: 18 }}>
-        접수 요청하기
-      </button>
+      <div className="form-actions">
+        <button type="submit" className="btn btn-primary btn-lg">
+          접수 요청하기
+        </button>
+        <a
+          href={`tel:${company.phoneRaw}`}
+          className="btn btn-accent btn-lg btn-call"
+          aria-label={`전화로 즉시 예약 ${company.phone}`}
+        >
+          <PhoneIcon />
+          <span>
+            <b>전화 즉시 예약</b>
+            <em>{company.phone}</em>
+          </span>
+        </a>
+      </div>
       <p className="form-note">
-        온라인 접수 후 상담원이 요금과 배차 가능 여부를 확인한 뒤 확정합니다. 입력하신
-        정보는 배송 상담 목적 외에는 사용되지 않습니다.
+        온라인 접수 후 상담원이 요금과 배차 가능 여부를 확인한 뒤 확정합니다. 급하시면
+        <b> 전화 즉시 예약</b>으로 바로 상담·배차받으실 수 있습니다. 입력하신 정보는 배송
+        상담 목적 외에는 사용되지 않습니다.
       </p>
     </form>
   );
