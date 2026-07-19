@@ -4,8 +4,8 @@ export const company = {
   name: "바이크익스프레스",
   nameEn: "BikeExpress",
   tagline: "전국 퀵서비스 빠른 접수",
-  phone: "1666-0000",
-  phoneRaw: "16660000",
+  phone: "0508-202-4690",
+  phoneRaw: "05082024690",
   kakao: "@bikeexpress",
   email: "help@bikeexpress.co.kr",
   hours: "평일 08:00 ~ 20:00 / 야간·주말 접수 별도 안내",
@@ -140,7 +140,7 @@ export const ctaButtons = [
 
 // 모바일 하단 고정 바
 export const mobileBar = [
-  { label: "전화접수", icon: "phone", href: "tel:16660000" },
+  { label: "전화접수", icon: "phone", href: "tel:05082024690" },
   { label: "카톡접수", icon: "chat", href: "/order/#kakao" },
   { label: "온라인접수", icon: "form", href: "/order/" },
   { label: "기사지원", icon: "rider", href: "/rider/apply/" },
