@@ -53,10 +53,38 @@ function kstNow() {
   return t.toISOString().replace("T", " ").slice(0, 16) + " (KST)";
 }
 
+// 봇 토큰 형태(예: 5270773696:AAH...)인지 판별
+const TOKEN_RE = /^\d{6,}:[A-Za-z0-9_-]{30,}$/;
+
+// 환경변수에서 토큰/챗ID를 유연하게 찾음
+//  1) 표준 방식: TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID
+//  2) 호환 방식: 변수 '이름'에 봇 토큰, '값'에 챗ID를 넣은 경우 자동 인식
+function resolveCreds(env) {
+  let token = env.TELEGRAM_BOT_TOKEN || env.BOT_TOKEN || "";
+  let chatId = env.TELEGRAM_CHAT_ID || env.CHAT_ID || "";
+  if (token && chatId) return { token, chatId };
+
+  for (const [k, v] of Object.entries(env || {})) {
+    if (typeof v !== "string") continue;
+    // 이름이 토큰 형태면 → 이름=토큰, 값=챗ID
+    if (TOKEN_RE.test(k)) {
+      token = token || k;
+      chatId = chatId || v;
+      break;
+    }
+    // 값이 토큰 형태면 → 값=토큰, 이름=챗ID (반대로 넣은 다른 경우)
+    if (TOKEN_RE.test(v)) {
+      token = token || v;
+      chatId = chatId || k;
+      break;
+    }
+  }
+  return { token, chatId };
+}
+
 export async function onRequestPost(context) {
   const { request, env } = context;
-  const token = env.TELEGRAM_BOT_TOKEN;
-  const chatId = env.TELEGRAM_CHAT_ID;
+  const { token, chatId } = resolveCreds(env);
 
   if (!token || !chatId) {
     // 비밀값은 노출하지 않고, 인식 여부와 개수만 진단용으로 전달
