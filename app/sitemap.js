@@ -1,27 +1,40 @@
-import { primaryNav, regionSlugs, vehicles } from "./data/site";
+import { SITE_URL, primaryNav, regionSlugs, vehicles } from "./data/site";
 
 export const dynamic = "force-static";
 
-const BASE = "https://www.bikeexpress.co.kr";
+const LASTMOD = "2026-07-19";
+
+// 우선순위/변경빈도 규칙
+function meta(path) {
+  if (path === "/") return { priority: 1.0, changeFrequency: "daily" };
+  if (path === "/order/" || path === "/rider/apply/")
+    return { priority: 0.9, changeFrequency: "weekly" };
+  if (path.startsWith("/area/") || path.startsWith("/rider/area/"))
+    return { priority: 0.8, changeFrequency: "weekly" };
+  // 인덱스(허브) 페이지
+  if (/^\/[a-z-]+\/$/.test(path)) return { priority: 0.8, changeFrequency: "weekly" };
+  return { priority: 0.7, changeFrequency: "weekly" };
+}
 
 export default function sitemap() {
-  const staticPaths = new Set(["/", "/order/"]);
+  const paths = new Set(["/", "/order/"]);
 
   primaryNav.forEach((item) => {
-    staticPaths.add(item.href);
-    (item.children || []).forEach((c) => staticPaths.add(c.href));
+    paths.add(item.href);
+    (item.children || []).forEach((c) => paths.add(c.href));
   });
 
-  // 동적 지역/차량 경로
+  // 전국 17개 시·도 고객/기사 지역 페이지
   regionSlugs.forEach((s) => {
-    staticPaths.add(`/area/${s}/`);
-    staticPaths.add(`/rider/area/${s}/`);
+    paths.add(`/area/${s}/`);
+    paths.add(`/rider/area/${s}/`);
   });
-  vehicles.forEach((v) => staticPaths.add(`/vehicle/${v.slug}/`));
+  // 차량 상세
+  vehicles.forEach((v) => paths.add(`/vehicle/${v.slug}/`));
 
-  return Array.from(staticPaths).map((path) => ({
-    url: `${BASE}${path}`,
-    changeFrequency: path === "/" ? "daily" : "weekly",
-    priority: path === "/" ? 1 : path === "/order/" || path === "/rider/apply/" ? 0.9 : 0.7,
+  return Array.from(paths).map((path) => ({
+    url: `${SITE_URL}${path}`,
+    lastModified: LASTMOD,
+    ...meta(path),
   }));
 }

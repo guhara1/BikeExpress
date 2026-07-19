@@ -29,6 +29,11 @@ export const metadata = {
       "오토바이부터 1톤 화물까지 전국 배차. 서류·소형물품·기업배송·긴급배송 신속 접수.",
   },
   robots: { index: true, follow: true },
+  verification: {
+    other: {
+      "naver-site-verification": "5cdd1cb46a46cff72f3d6cc50711f48a4b4a7fd6",
+    },
+  },
 };
 
 export const viewport = {
