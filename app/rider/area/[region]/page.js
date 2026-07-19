@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PageHero, CtaBand, Faq } from "@/app/components/ui";
+import { PageHero, CtaBand, Faq, RelatedLinks } from "@/app/components/ui";
 import RiderForm from "@/app/components/RiderForm";
 import { regions, regionSlugs } from "@/app/data/site";
 import { regionContent } from "@/app/data/regionContent";
@@ -140,6 +140,21 @@ export default function RiderRegionPage({ params }) {
           </div>
         </section>
       )}
+
+      <RelatedLinks
+        title={`${r.name} 기사 모집 관련 안내`}
+        soft={false}
+        items={[
+          { label: `${r.name} 오토바이 퀵기사 모집`, href: "/rider/motorcycle/" },
+          { label: `${r.name} 초보 퀵기사 시작`, href: "/rider/beginner/" },
+          { label: `${r.name} 투잡·부업 기사`, href: "/rider/part-time/" },
+          { label: `${r.name} 퀵기사 예상 수입`, href: "/rider/income/" },
+          { label: `${r.name} 퀵기사 수수료·비용`, href: "/rider/fees/" },
+          { label: `${r.name} 기사 가입 준비물`, href: "/rider/requirements/" },
+          { label: `${r.name} 기사 지원하기`, href: "/rider/apply/" },
+          { label: `${r.name} 퀵서비스 접수(고객)`, href: `/area/${r.slug}/` },
+        ]}
+      />
 
       <CtaBand
         title={`${r.name}에서 퀵기사로 시작하세요`}

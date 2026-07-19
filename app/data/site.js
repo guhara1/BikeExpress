@@ -1,5 +1,8 @@
 // 사이트 전역 데이터 - 회사 정보, 네비게이션, 지역, 차량 정보
 
+// 사이트 정식 URL (스키마·사이트맵 공통). 커스텀 도메인 연결 시 이 값만 변경하세요.
+export const SITE_URL = "https://bikeexpress.pages.dev";
+
 export const company = {
   name: "바이크익스프레스",
   nameEn: "BikeExpress",

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import OrderForm from "./components/OrderForm";
-import { CtaBand, Faq } from "./components/ui";
+import Reviews from "./components/Reviews";
+import { CtaBand, Faq, RelatedLinks } from "./components/ui";
 import {
   vehicles,
   regionGroups,
@@ -292,6 +293,28 @@ export default function Home() {
           />
         </div>
       </section>
+
+      <Reviews limit={6} />
+
+      <RelatedLinks
+        title="인기 퀵서비스 바로가기"
+        desc="지역·서비스별로 자주 찾는 페이지를 모았습니다."
+        soft={false}
+        items={[
+          { label: "서울 오토바이 퀵서비스", href: "/area/seoul/" },
+          { label: "경기 당일 퀵배송", href: "/area/gyeonggi/" },
+          { label: "부산 장거리 퀵서비스", href: "/area/busan/" },
+          { label: "인천 화물 퀵(다마스·라보)", href: "/area/incheon/" },
+          { label: "긴급 서류 퀵배송", href: "/quick-service/urgent/" },
+          { label: "당일 퀵배송 접수", href: "/quick-service/same-day/" },
+          { label: "야간·주말 퀵서비스", href: "/quick-service/night-weekend/" },
+          { label: "기업 정기배송·월정산", href: "/business/" },
+          { label: "다마스·라보·1톤 차량 요금", href: "/guide/vehicle-price/" },
+          { label: "퀵서비스 요금·할증 안내", href: "/guide/" },
+          { label: "전국 퀵기사 모집", href: "/rider/recruit/" },
+          { label: "오토바이 퀵기사 지원", href: "/rider/apply/" },
+        ]}
+      />
 
       <CtaBand />
     </>

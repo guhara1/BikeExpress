@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PageHero, CtaBand, Faq } from "@/app/components/ui";
+import { PageHero, CtaBand, Faq, RelatedLinks } from "@/app/components/ui";
 import OrderForm from "@/app/components/OrderForm";
 import { regions, regionSlugs, regionGroups } from "@/app/data/site";
 import { regionContent } from "@/app/data/regionContent";
@@ -136,8 +136,24 @@ export default function RegionPage({ params }) {
         </section>
       )}
 
+      <RelatedLinks
+        title={`${r.name} 퀵서비스 관련 안내`}
+        desc="필요한 서비스로 바로 이동하세요."
+        soft={false}
+        items={[
+          { label: `${r.name} 오토바이 퀵서비스`, href: "/quick-service/motorcycle/" },
+          { label: `${r.name} 당일 퀵배송`, href: "/quick-service/same-day/" },
+          { label: `${r.name} 긴급 퀵서비스`, href: "/quick-service/urgent/" },
+          { label: `${r.name} 장거리 퀵서비스`, href: "/quick-service/long-distance/" },
+          { label: `${r.name} 화물 퀵(다마스·라보·1톤)`, href: "/vehicle/" },
+          { label: `${r.name} 기업 정기배송`, href: "/business/" },
+          { label: `${r.name} 퀵서비스 요금 안내`, href: "/guide/" },
+          { label: `${r.name} 퀵기사 모집`, href: `/rider/area/${r.slug}/` },
+        ]}
+      />
+
       {siblings.length > 0 && (
-        <section className="section">
+        <section className="section soft">
           <div className="container">
             <div className="section-head">
               <h2>{group.name} 다른 지역</h2>

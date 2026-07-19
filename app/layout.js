@@ -3,10 +3,12 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import MobileBar from "./components/MobileBar";
-import { company } from "./data/site";
+import JsonLd from "./components/JsonLd";
+import { company, SITE_URL } from "./data/site";
+import { globalGraph } from "./lib/schema";
 
 export const metadata = {
-  metadataBase: new URL("https://www.bikeexpress.co.kr"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: `${company.name} | 전국 최저가 퀵서비스 빠른 접수 · 오토바이 퀵기사 모집`,
     template: `%s | ${company.name}`,
@@ -39,6 +41,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <body>
+        <JsonLd data={globalGraph()} />
         <Header />
         <main>{children}</main>
         <Footer />

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import JsonLd from "./JsonLd";
+import { breadcrumbSchema, faqSchema } from "@/app/lib/schema";
 
 // 구조화된 본문 블록 렌더러
 export function Blocks({ items }) {
@@ -39,10 +41,11 @@ export function Blocks({ items }) {
   );
 }
 
-// FAQ 목록 (details/summary 기반 아코디언)
-export function Faq({ items }) {
+// FAQ 목록 (details/summary 기반 아코디언) + FAQPage 스키마 자동 출력
+export function Faq({ items, schema = true }) {
   return (
     <div className="faq">
+      {schema && items && items.length > 0 && <JsonLd data={faqSchema(items)} />}
       {items.map((it, i) => (
         <details className="faq-item" key={i}>
           <summary>{it.q}</summary>
@@ -75,6 +78,7 @@ export function ContentPage({ title, desc, crumbs, variant, blocks, children, ct
 export function PageHero({ title, desc, crumbs = [], variant }) {
   return (
     <section className={`page-hero ${variant === "rider" ? "rider" : ""}`}>
+      {crumbs.length > 0 && <JsonLd data={breadcrumbSchema(crumbs)} />}
       <div className="container">
         {crumbs.length > 0 && (
           <nav className="breadcrumb" aria-label="위치">
@@ -147,6 +151,33 @@ export function CardGrid({ items, cols = 3 }) {
         );
       })}
     </div>
+  );
+}
+
+// 롱테일 내부링크 블록 (칩 형태)
+export function RelatedLinks({
+  title = "함께 보면 좋은 페이지",
+  desc,
+  items = [],
+  soft = true,
+}) {
+  if (!items.length) return null;
+  return (
+    <section className={`section ${soft ? "soft" : ""}`}>
+      <div className="container">
+        <div className="section-head">
+          <h2>{title}</h2>
+          {desc && <p>{desc}</p>}
+        </div>
+        <div className="chip-grid" style={{ justifyContent: "center" }}>
+          {items.map((it) => (
+            <Link href={it.href} key={it.href + it.label} className="chip">
+              {it.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
